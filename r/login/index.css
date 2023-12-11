@@ -1,0 +1,16 @@
+.login-c {
+  
+}
+.account {
+  display: flex;
+}
+.pwd {
+  display: flex;
+  margin-top: 12px;
+}
+.acc-in, .pwd-in {
+  margin-left: 20px;
+}
+.btn {
+  margin-top: 12px;
+}
