@@ -44,7 +44,16 @@ class Content extends Component {
   constructor(props) {
     super(props)
   }
+  // 静态属性，验证类
+  static propTypes = {
+    todoList(e) {
 
+    }
+  }
+  // 默认属性
+  static defaultProps = {
+
+  }
   delTodolist(id) {
     const res = window.confirm('是否删除')
     res && this.props.delTodolist(id)
@@ -72,6 +81,12 @@ class Content extends Component {
   }
 }
 
+// 属性验证
+// Content.propTypes = {
+//   todoList(e) {
+
+//   }
+// }
 class EmptyStatus extends Component {
   constructor(props) {
     super(props)
