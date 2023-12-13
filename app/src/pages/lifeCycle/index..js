@@ -24,8 +24,9 @@ class Life extends Component {
     };
 
   }
+  // render后更新之前
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    debugger
+  
     // 获取滚动位置等信息
     return null;
   }
