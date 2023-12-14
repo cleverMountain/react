@@ -28,3 +28,35 @@ export default function Use () {
     </div>
   )
 }
+
+// useState事项
+const status = []
+const statusSetter = []
+let statusIndex = 0
+function createStatus(initStatus) {
+  return initStatus
+}
+function createStatusSetter(stateIndex) {
+  return (newState) => {
+
+    if (typeof newState === 'function') {
+      status[stateIndex] = newState(status[stateIndex])
+    } else {
+      status[stateIndex] = newState
+    }
+  }
+}
+function myUseState(initStatus) {
+  status[statusIndex] = createStatus(initStatus)
+  statusSetter[statusIndex] = createStatusSetter(statusIndex)
+  let res = [status[statusIndex], statusSetter[statusIndex]]
+  statusIndex++
+  return res
+}
+let [count, setCount] = myUseState(1)
+console.log(count, setCount)
+setCount(33)
+console.log(count)
+// setCount(2)
+console.log(status)
+// console.log(count)

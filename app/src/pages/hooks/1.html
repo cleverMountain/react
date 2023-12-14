@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+//     function myUseState(initialState) {
+//       let state = initialState;
+//       let listeners = [];
+
+//       function setState(newState) {
+//         state = newState;
+//         listeners.forEach(listener => listener());
+//       }
+
+//       function useState() {
+//         const listenerIndex = listeners.length;
+
+//         const getCurrentState = () => state;
+
+//         const updateState = (newStateOrFunction) => {
+//           const newState = typeof newStateOrFunction === 'function'
+//             ? newStateOrFunction(state)
+//             : newStateOrFunction;
+
+//           setState(newState);
+//         };
+
+//         listeners.push(() => {
+//           // 触发重新渲染
+//           console.log("Component re-rendered with new state:", state);
+//         });
+
+//         return [getCurrentState(), updateState, listenerIndex];
+//       }
+
+//       return useState();
+//     }
+
+//     // 使用 myUseState 的示例
+//     let [count, setCount] = myUseState(1);
+//     console.log(count); // 打印为 1
+
+//     // 使用回调函数获取更新后的值，并触发重新渲染
+//     setCount(prevState => {
+//       console.log(prevState); // 打印为 1
+//       return 33;
+//     });
+
+// // // 由于更新是异步的，这里可能仍然打印为 1
+// // console.log(count);
+
+// // // 使用 setTimeout 模拟异步更新
+// // setTimeout(() => {
+// //   // 此时应该已经触发重新渲染，打印为 33
+// //   console.log(count);
+// // }, 0);
+function reducer(obj) {
+debugger
+}
+
+const useReducer1 = (reducer, initState) => {
+
+ const dispatch = (obj) => {
+  reducer(obj)
+ }
+  return [initState, dispatch]
+}
+
+let [count, dispatch] = useReducer1(reducer, 1)
+console.log(count)
+
+dispatch({a: 1, b: 2})
+
+  </script>
+</body>
+
+</html>
