@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>31</div>
+
+  <script type="module">
+    import redux from "./store/index.js"
+    const initalStatus = {
+      a: 1
+    }
+
+    const reducer = (preState = initalStatus, action = {}) => {
+      const { type, payload } = action
+    
+      switch (type) {
+        case 'add':
+          const origin = preState.a
+          preState.a = origin + payload
+          return preState
+      }
+      return preState
+    }
+
+    const { createStore } = redux
+    const store = createStore(reducer)
+    console.log(store)
+
+    const { dispatch, subscribe, getState } = store
+    console.log(getState())
+    subscribe(() => {
+      console.log('订阅了')
+    })
+    dispatch({type: 'add', payload: 1})
+    console.log(getState())
+  </script>
+</body>
+
+</html>

@@ -1,5 +1,13 @@
+
+import Tabbar from "../../components/Tabbar";
+
 export default function Home() {
   return (
-    <div>这是首页</div>
+    <div>
+      <li>首页</li>
+      <Tabbar />
+     
+    </div>
+
   )
 }

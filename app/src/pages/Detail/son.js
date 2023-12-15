@@ -1,5 +1,9 @@
-export default function Son() {
+export default function Son(props) {
+  const handle = () => {
+    console.log(props)
+    props.history.push('/my')
+  }
   return (
-    <div>我是Detail的儿子</div>
+    <div onClick={handle}>我是Detail的儿子</div>
   )
 }
