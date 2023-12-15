@@ -1,9 +1,9 @@
-import { createStore } from "redux"
+import { createStore, combineReducers } from "redux"
 const initalStatus = {
   a: 1
 }
 
-const reducer = (preState = initalStatus, action) => {
+const CountReducer = (preState = initalStatus, action) => {
   const { type, payload } = action
   switch (type) {
     case 'add':
@@ -13,6 +13,10 @@ const reducer = (preState = initalStatus, action) => {
   }
   return preState
 }
+
+const reducer = combineReducers({
+  CountReducer
+})
 
 const store1 = createStore(reducer)
 

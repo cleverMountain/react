@@ -7,7 +7,7 @@ export default function Detail () {
 
   return (
     <div>
-      <li>电影院: {store1.getState().a}</li>
+      <li>电影院: {store1.getState().CountReducer.a}</li>
       <Route path="/detail/son" component={Son}></Route>
       <Redirect from="/detail" to="/detail/son"></Redirect>
       <Tabbar />

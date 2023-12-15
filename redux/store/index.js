@@ -1,9 +1,10 @@
-const list = []
-let store = null
-let getReducer = null
+
 function Redux() {
+  const list = []
+  let store = null
+  let getReducer = null
   const dispatch = (action) => {
-  
+
     list.forEach(handler => handler())
     getReducer(store, action)
   }
@@ -17,7 +18,7 @@ function Redux() {
     getReducer = reducer
     store = reducer()
     // return res
-    return {dispatch, subscribe, getState}
+    return { dispatch, subscribe, getState }
   }
   return { createStore }
 }
