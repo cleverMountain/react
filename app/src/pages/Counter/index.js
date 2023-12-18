@@ -1,6 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { increment, decrement } from './action.js';
+
+// action
+const increment = () => ({
+  type: 'INCREMENT',
+});
+
+const decrement = () => ({
+  type: 'DECREMENT',
+});
+
 
 const Counter = ({ count, increment, decrement }) => {
   return (
