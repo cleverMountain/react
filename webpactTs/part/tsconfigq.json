@@ -1,0 +1,19 @@
+{
+  "include": ["./src/**/*"], // 包含src的文件
+  "exclude": ["./src/hello/**"], // 不包含src/hello里的文件，默认node_modules
+  "compilerOptions": {
+    // "strict": true,  // 所有严格检查
+    "target": "es2015",  // 编译es版本
+    "module": "commonjs",  // 模块化版本
+    "outDir": "./dist", // 打包后的文件
+    "allowJs": false, // 不编译js(打包)
+    "checkJs": false, // 是否检查js，ts是否可以混入js
+    "removeComments": true, // 是否保留js
+    // "noEmit": false, // 不生成编译后的文件
+    // "noEmitOnError": false, // 报错时不编译
+    "alwaysStrict": true, // 编译后的js文件是否使用严格模式
+    "noImplicitAny": true, // 不允许使用隐式any
+    "noImplicitThis": true, // 不允许不明确的this
+    "strictNullChecks": true, // null严格检查
+  }
+}

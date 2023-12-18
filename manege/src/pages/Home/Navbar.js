@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
@@ -27,13 +28,14 @@ const items = [
 const Navbar = () => {
   const navigate = useNavigate()
   const [openKeys, setOpenKeys] = useState('firstPage');
+  const onOpenChange = ({key}) => {
+    navigate(urls[key])
+  };
   useEffect(() => {
     setOpenKeys('firstPage')
     onOpenChange({key: openKeys})
   }, [openKeys])
-  const onOpenChange = ({key}) => {
-    navigate(urls[key])
-  };
+
   return (
     <Menu
       mode="inline"
