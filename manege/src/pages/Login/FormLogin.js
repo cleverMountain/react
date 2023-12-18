@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Checkbox, Form, Input } from 'antd';
+import { useNavigate, useParams  } from 'react-router-dom';
 import "./form.css"
-const FormLogin = () => {
+const FormLogin = (props) => {
+  const navigate = useNavigate();
+  const params = useParams()
   let [username, setUsername] = useState()
   let [password, setPasseord] = useState()
   const onFinish = () => {
-    console.log(username, password);
+    console.log(props)
+    console.log(params)
+    navigate('/home');
   };
   return (
     <Form
@@ -15,11 +20,11 @@ const FormLogin = () => {
       initialValues={{
         remember: true,
       }}
-   
+
     >
       <Form.Item
         name="username"
-        style={{marginTop: '52px'}}
+        style={{ marginTop: '52px' }}
         rules={[
           {
             required: true,
@@ -27,8 +32,8 @@ const FormLogin = () => {
           },
         ]}
       >
-        <Input 
-          prefix={<UserOutlined className="site-form-item-icon" />} 
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="用户名"
