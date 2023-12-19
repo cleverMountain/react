@@ -1,12 +1,10 @@
-.login-form  {
+.login-form {
   width: 80%;
 }
-
 :where(.css-dev-only-do-not-override-p7e5j5).ant-input-affix-wrapper {
   height: 39px !important;
   border-radius: 0 !important;
 }
-
 :where(.css-dev-only-do-not-override-p7e5j5)[class^="ant-form"] [class^="ant-form"],
 :where(.css-dev-only-do-not-override-p7e5j5)[class*=" ant-form"] [class^="ant-form"],
 :where(.css-dev-only-do-not-override-p7e5j5)[class^="ant-form"] [class*=" ant-form"],
@@ -21,7 +19,6 @@
   width: 308px;
   height: 42px;
   display: flex;
-  align-items: center;
   justify-content: center;
   align-items: center;
   background: #EC6A35;
@@ -35,9 +32,9 @@
 }
 .login-form .remenber {
   font-size: 12px;
-font-family: PingFangSC, PingFang SC;
-font-weight: 400;
-color: #FFFFFF;
+  font-family: PingFangSC, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
 }
 .aa {
   display: flex;

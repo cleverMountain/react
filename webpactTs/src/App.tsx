@@ -1,8 +1,8 @@
 import React from 'react'
-import Login from './pages/Login/index'
+import router from "./router"
 
 export default function App() {
     return (
-        <Login />
+        router
     )
 }
