@@ -2,65 +2,57 @@ import React, { useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-
+import { useEffect } from 'react';
+import { useNavigate,  } from 'react-router-dom';
 type MenuItem = Required<MenuProps>['items'][number];
-
+interface UrlsObj {
+  [propName: string]: string // 其他属性
+} 
+interface changeObj {
+  key: string,
+  [propName: string]: any, // 其他属性
+}
 function getItem(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
-  children?: MenuItem[],
   type?: 'group',
 ): MenuItem {
   return {
     key,
     icon,
-    children,
     label,
     type,
   } as MenuItem;
 }
-
+const urls: UrlsObj = {
+  firstPage: '/home/firstpage',
+  clock: '/home/clock',
+  stopCheck: '/home/stopcheck'
+}
 const items: MenuItem[] = [
-  getItem('Navigation One', 'sub1', <MailOutlined />, [
-    getItem('Option 1', '1'),
-    getItem('Option 2', '2'),
-    getItem('Option 3', '3'),
-    getItem('Option 4', '4'),
-  ]),
-  getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-    getItem('Option 5', '5'),
-    getItem('Option 6', '6'),
-    getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
-  ]),
-  getItem('Navigation Three', 'sub4', <SettingOutlined />, [
-    getItem('Option 9', '9'),
-    getItem('Option 10', '10'),
-    getItem('Option 11', '11'),
-    getItem('Option 12', '12'),
-  ]),
+  getItem('首页', 'firstPage', <MailOutlined />),
+  getItem('现场检查', 'stopCheck', <AppstoreOutlined />),
+  getItem('打卡', 'clock', <SettingOutlined />),
 ];
 
-// submenu keys of first level
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
 const Navbar: React.FC = () => {
-  const [openKeys, setOpenKeys] = useState(['sub1']);
+  const navigate = useNavigate()
 
-  const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    if (latestOpenKey && rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
-      setOpenKeys(keys);
-    } else {
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-    }
+  const [openKeys] = useState(['firstPage']);
+  const onOpenChange = (keys: changeObj) => {
+    navigate(urls[keys['key']])
   };
-
+  useEffect(() => {
+    onOpenChange({key: 'stopCheck'})
+  }, [])
   return (
     <Menu
       mode="inline"
       openKeys={openKeys}
-      onOpenChange={onOpenChange}
+      defaultSelectedKeys={['stopCheck']}
+      onClick={onOpenChange}
       style={{
         width: '100%',
         height: '100%'

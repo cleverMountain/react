@@ -1,0 +1,41 @@
+.stop-check {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  box-sizing: border-box;
+}
+.stop-check .top {
+  width: 100%;
+  height: 66px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+}
+.stop-check .line {
+  width: 100%;
+  height: 1px;
+  background: #808080;
+}
+.stop-check .bottom {
+  width: 100%;
+  height: calc(100% - 67px);
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+.stop-check .bottom .query {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+}
+.stop-check .bottom .query .string {
+  display: flex;
+  align-items: center;
+}
+.stop-check .bottom .query .string .title {
+  width: 78px;
+}
+.stop-check .bottom .table {
+  width: 100%;
+  height: calc(100% - 72px);
+}
