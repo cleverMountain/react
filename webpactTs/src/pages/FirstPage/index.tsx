@@ -1,9 +1,15 @@
-import React from "react"
+import React, {useEffect} from "react"
+import { connect } from 'react-redux';
 
-const FirstPage: React.FC = () => {
+const FirstPage: React.FC = (a) => {
+  useEffect(() => {
+    console.log(a)
+  })
   return (
     <div>2</div>
   )
 }
-
-export default FirstPage
+const mapStateToProps = (state) => ({
+  someData: state,
+});
+export default connect(mapStateToProps)(FirstPage)

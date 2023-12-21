@@ -11,7 +11,7 @@
 <body>
   <div>31</div>
 
-  <script type="module">
+  <!-- <script type="module">
     import redux from "./store/index.js"
     const initalStatus = {
       a: 1
@@ -40,6 +40,30 @@
     })
     dispatch({type: 'add', payload: 1})
     console.log(getState())
+  </script> -->
+  <script>
+    
+    function getTarget(arr, target) {
+      var map = {};
+      for (var i = 0; i < arr.length; i++) {
+        var curNum = arr[i];
+        var curTarget = (target - curNum);
+        var cur = map[curTarget];
+     
+        if (cur !== undefined) {
+  
+          return [cur, i];
+        }
+        else {
+
+      
+          map[curNum] = i;
+          console.log(map)
+        }
+      }
+    }
+    console.log(getTarget([1, 2, 3], 3));
+
   </script>
 </body>
 

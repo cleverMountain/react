@@ -5,7 +5,8 @@ import "./form.less"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../../utils/axios';
-import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+
+import { connect } from 'react-redux';
 
 
 
@@ -14,7 +15,8 @@ interface ParamsObj {
   password?: string,
 }
 
-const App: React.FC = () => {
+const App: React.FC = (state) => {
+  
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -30,7 +32,9 @@ const App: React.FC = () => {
       password: '1234566',
     } as ParamsObj)).then((res: any) => {
       if (res.success) {
+   
         localStorage.setItem('token', res.data.token)
+        state.dispatch({ type: 'SOME_ACTION', payload: 1 })
         navigate('/home');
       }
     })
@@ -78,5 +82,7 @@ const App: React.FC = () => {
     </Form>
   );
 };
-
-export default App;
+const mapStateToProps = (state):void => {
+  return state
+}
+export default connect(mapStateToProps)(App)
