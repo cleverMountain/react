@@ -3,7 +3,17 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Checkbox, Form, Input } from 'antd';
 import "./form.less"
 import { useState } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import http from '../../utils/axios';
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+
+
+
+interface ParamsObj {
+  username?: string,
+  password?: string,
+}
+
 const App: React.FC = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>('')
@@ -15,8 +25,15 @@ const App: React.FC = () => {
     setPassword(e.currentTarget.value)
   }
   const onFinish = () => {
-    console.log(username, password)
-    navigate('/home');
+    http.post('/login', ({
+      username: 'admin',
+      password: '1234566',
+    } as ParamsObj)).then((res: any) => {
+      if (res.success) {
+        localStorage.setItem('token', res.data.token)
+        navigate('/home');
+      }
+    })
   }
   return (
     <Form

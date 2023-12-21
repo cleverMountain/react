@@ -4,39 +4,70 @@
   background: #FFFFFF;
 
   box-sizing: border-box;
+
   .top {
     width: 100%;
     height: 66px;
     padding: 0 24px;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
   }
+
   .line {
     width: 100%;
     height: 1px;
     background: #808080;
   }
+
   .bottom {
     width: 100%;
     height: calc(100% - 67px);
     padding: 0 24px;
     box-sizing: border-box;
+
     .query {
       width: 100%;
       height: 72px;
       display: flex;
       align-items: center;
+
       .string {
         display: flex;
         align-items: center;
+
         .title {
           width: 78px;
         }
       }
     }
+
     .table {
       width: 100%;
+
       height: calc(100% - 72px);
+      .level-bg {
+        width: 54px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-family: PingFangSC, PingFang SC;
+        font-weight: 400;
+      }
+      .level-one {
+        color: #EC4B4B;
+        background: rgba(236, 75, 75, 0.27);
+      }
+      .level-two {
+        color: #EC4B4B;
+        background: rgba(236, 75, 75, 0.27);
+      }
+      .level-three {
+        color: #EC4B4B;
+        background: rgba(236, 75, 75, 0.27);
+      }
     }
   }
 }

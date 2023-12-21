@@ -17,6 +17,7 @@
     "@types/react-router-dom": "^5.3.3",
     "antd": "^5.12.3",
     "babel-loader": "^9.1.3",
+    "dayjs": "^1.11.10",
     "html-webpack-plugin": "^5.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

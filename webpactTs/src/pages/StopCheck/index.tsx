@@ -1,99 +1,95 @@
 import React, { ChangeEvent } from "react"
+import dayjs, { Dayjs } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Button, Input, DatePicker, Select, Space, Table, Tag } from "antd"
 import type { ColumnsType } from 'antd/es/table';
 const { RangePicker } = DatePicker;
 import "./index.less"
-import { useState } from "react";
-// import http from "../../utils/axios"
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import http from "../../utils/axios"
 
 
 interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
+  person: string;
+  level: number;
+  status: number;
+  key: number
 }
-
+interface ParamsObj {
+  startTime: string,
+  endTime: string,
+  queryString: string,
+  selectValue: string | undefined
+}
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: '盘点人',
+    dataIndex: 'person',
+
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: '问题等级',
+    dataIndex: 'level',
+    render: (_, record) => {
+
+      let status: Array<Array<string>> = [
+        ['等级1', 'level-one'],
+        ['等级2', 'level-two'],
+        ['等级3', 'level-three']
+      ],
+        className: string = 'level-bg',
+        content: string = status[record.status - 1][0],
+        otherClaaName: string = ' ' + status[record.status - 1][1];
+      className += otherClaaName
+      return (
+        <div className={className}>{content}</div>
+      )
+    }
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: '是否闭环',
+    dataIndex: 'status',
   },
   {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
+    title: '操作',
+    dataIndex: 'operate',
+    render: (_, record) => {
+      return (
+        <a>删除</a>
+      )
+    }
+  }
 ];
 const data: DataType[] = [
   {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    person: '夏利1',
+    level: 1,
+    status: 1,
+    key: 1,
   },
   {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    person: '夏利2',
+    level: 2,
+    status: 2,
+    key: 2,
   },
   {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
+    person: '夏利3',
+    level: 3,
+    status: 3,
+    key: 3
+  }
 ];
 const StopCheck: React.FC = () => {
   interface stateSelectObj {
-    value?: string,
-    label?: string
+    value: string,
+    label: string,
   }
+
   const [stateSelect, setStateSelect] = useState<stateSelectObj[]>([])
   const [queryString, setQueryString] = useState<string>('')
+  const [timeString, setTimeString] = useState<string[]>([])
+  const [selectValue, setSelectValue] = useState<string | undefined>('')
   const fetchStateSelectData = () => {
     setTimeout(() => {
       const optiops = [
@@ -110,34 +106,59 @@ const StopCheck: React.FC = () => {
     }, 400)
   }
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
- 
     setQueryString(e.target.value)
   }
-  const handleSelectChange = (value:string | undefined ) => {
-  
+  const handleSelectChange = (value: string | undefined) => {
+    setSelectValue(value)
   }
-  const handleTimeChange = (time: Array<object>) => {
-     console.log(time[0])
+  const handleTimeChange = (time: any) => {
+    if (time) {
+      console.log(time[0].format('YYYY-MM-DD'), time[1].format('YYYY-MM-DD'))
+      setTimeString([time[0].format('YYYY-MM-DD'), time[1].format('YYYY-MM-DD')])
+    }
+  }
+  const fetchTableData = (): void => {
+    const startTime: string = timeString[0] || '',
+      endTime: string = timeString[1] || '',
+      params: ParamsObj = Object.create(null);
+    params['queryString'] = queryString
+    params['startTime'] = startTime
+    params['endTime'] = endTime
+    params['selectValue'] = selectValue
+    console.log(params)
+  }
+  const upload = () => {
+    http.post('/aaa')
   }
   useEffect(() => {
     fetchStateSelectData()
   }, [])
+  useEffect(() => {
+    fetchTableData()
+  }, [timeString, queryString, selectValue])
   return (
     <div className="stop-check">
       <div className="top">
         <Button type="primary">新建</Button>
-        <Button style={{ marginLeft: '20px' }}>导入</Button>
+        <Button style={{ marginLeft: '20px' }} onClick={upload}>导入</Button>
       </div>
       <div className="line"></div>
       <div className="bottom">
         <div className="query">
           <div className="string">
             <div className="title">查询条件:</div>
-            <Input style={{ width: '290px', height: '32px' }} value={queryString} onChange={handleInputChange}></Input>
+            <Input
+              style={{ width: '290px', height: '32px' }}
+              value={queryString}
+              onChange={handleInputChange}
+            />
           </div>
           <div className="string" style={{ marginLeft: '24px' }}>
             <div className="title">查询时间:</div>
-            <RangePicker onChange={handleTimeChange} style={{ width: '290px', height: '32px' }} />
+            <RangePicker
+              onChange={handleTimeChange}
+              style={{ width: '290px', height: '32px' }}
+            />
           </div>
           <div className="string" style={{ margin: '0 24px' }}>
             <div className="title">查询状态:</div>
