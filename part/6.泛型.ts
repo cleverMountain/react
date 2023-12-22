@@ -7,12 +7,14 @@ func1<number>(1)
 func1<string>('1')
 
 // 函数声明方式
-
+// Array<T>
 function identity<T>(arg: T): T {
   return arg;
 }
 
+
 let myIdentity: { <T>(arg: T): T } = identity; // 对象字面量写法
+// 泛型  参数为泛型  返回值为泛型
 let myIdentity1: <T>(arg: T) => T = identity; // 函数写法
 
 
@@ -69,3 +71,5 @@ type XType = typeof x
 type keyOfType = keyof XType
 getProperty(x, 'a')
 getProperty<XType, keyOfType>(x, 'a')
+
+
