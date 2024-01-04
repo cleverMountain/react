@@ -33,7 +33,7 @@ const urls: UrlsObj = {
 const items: MenuItem[] = [
   getItem('首页', 'firstPage', <MailOutlined />),
   getItem('现场检查', 'stopCheck', <AppstoreOutlined />),
-  getItem('打卡', 'clock', <SettingOutlined />),
+  getItem('档案管理', 'clock', <SettingOutlined />),
 ];
 
 

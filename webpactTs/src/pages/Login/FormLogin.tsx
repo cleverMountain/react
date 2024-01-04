@@ -29,7 +29,7 @@ const App: React.FC = (state) => {
   const onFinish = () => {
     http.post('/login', ({
       username: 'admin',
-      password: '1234566',
+      password: '123456',
     } as ParamsObj)).then((res: any) => {
       if (res.success) {
    

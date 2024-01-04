@@ -8,7 +8,7 @@ import Login from "../pages/Login/index"
 import HomePage from "../pages/Home";
 import FirstPage from "../pages/FirstPage";
 import StopCheck from "../pages/StopCheck";
-import Clock from "../pages/Clock";
+import Clock from "../pages/Clock/index";
 
 export interface RouteObj {
   path: string,
