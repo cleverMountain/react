@@ -19,10 +19,12 @@ function createReduxState(reducer) {
   let _state = reducer()
   Object.defineProperty(redux, '_state', {
     get() {
+      console.log(_state)
       return _state
     },
     set(newVal) {
       _state = newVal
+      publish()
     }
   })
 }
@@ -32,8 +34,8 @@ function subscribe(cb) {
   cbList.push(cb)
 }
 function  _dispatch(reducer) {
-  return function (payload, type) {
-    redux._state = reducer(payload, type)
+  return function (action) {
+    redux._state = reducer(redux._state, action)
  
   }
 }

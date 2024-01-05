@@ -12,7 +12,7 @@ const routes = [
     element: <Home />
   },
   {
-    path: '/list',
+    path: '/list/:id',
     element: (
       <Suspense fallback={<ViewLoading />}>
         <List />
@@ -20,7 +20,7 @@ const routes = [
     )
   },
   {
-    path: '/detail',
+    path: '/detail/:id',
     element: (
       <Suspense fallback={<ViewLoading />}>
         <Detail />

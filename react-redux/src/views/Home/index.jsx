@@ -1,33 +1,64 @@
-import { useEffect, useState } from "react"
 
-import store from "../../store"
+import {useProductList} from "../../hooks"
+import { Link } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
+import { connect } from "react-redux";
+import { listAction } from "../../store/action";
+import { useEffect } from "react";
 
-const Home = () => {
-  const [count, setCount] = useState(store.getState().countReducer.count)
+const Home = ({productList, listAction}) => {
+  
+// console.log(productList, listAction)
+  const list = [],
+        navigate = useNavigate();
   useEffect(() => {
-    const unscribe = store.subscribe(() => {
-      setCount(store.getState().countReducer.count)
-    })
-    return () => {
-      unscribe()
+    if (!productList.length) {
+      listAction()
     }
   }, [])
-  const handlePlus = async () => {
-    // setTimeout(() => {
-      
-    // })
-    let a = await Promise.resolve(4)
-  
-    store.dispatch({type: 'PLUS', payload: a})
-  }
   return (
     <div>
-      <div>首页</div>
-      <div>{count}</div>
-      <button onClick={handlePlus}>+</button>
+      <div>
+        <div>
+          <Link to={ {pathname: "list/high"} }>最新</Link>
+          <Link to={ {pathname: "list/hot"} }>最热</Link>
+        </div>
+        <div>
+          {
+            productList.map(item => {
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => navigate(`/detail/${item.id}`)}
+                >
+                  {item.name}
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>
     </div>
   )
 }
 
-
-export default Home
+/**
+ * connet(mapStateToProps, mapDispatchToProps) {
+ *   let param = Object.assign(mapStateToProps(), mapDispatchToProps)
+ *   return function (component) {
+ *     return component(param)
+ *   }
+ * }
+ * 
+ */
+// 需要的state转化为prop
+const mapStateToProps = (state) => {
+  return {
+    productList: state.productList
+  }
+}
+// 需要的dispatch或action
+const mapDispatchToProps = {
+  listAction
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

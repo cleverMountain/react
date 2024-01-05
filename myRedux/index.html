@@ -13,7 +13,7 @@
   <script type="module">
     import store from "./store/index.js"
     
-
+    console.log(store.getState())
     const addBtn = document.getElementById('add'),
           minusBtn = document.getElementById('minus'),
           countEle = document.getElementById('count')
@@ -34,7 +34,7 @@
         store.dispatch({type: 'add', payload: 1})
       })
       minusBtn.addEventListener('click', () => {
-        store.dispatch({type: 'minus'})
+        store.dispatch({type: 'minus', payload: 1})
       })
     }
     init()
