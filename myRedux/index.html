@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <button id="add">+</button>
   <span id="count">0</span>
   <button id="minus">-</button>
   <script type="module">
     import store from "./store/index.js"
-    
+
     console.log(store.getState())
     const addBtn = document.getElementById('add'),
-          minusBtn = document.getElementById('minus'),
-          countEle = document.getElementById('count')
-    function render () {
-    
-      countEle.innerHTML = store.getState().count
+      minusBtn = document.getElementById('minus'),
+      countEle = document.getElementById('count')
+    function render() {
+
+      console.log(store.getState())
+      countEle.innerHTML = store.getState().reducerCount.count
     }
     store.subscribe(() => {
       render()
     })
-    function init () {
+    function init() {
       render()
       bindEvent()
     }
     function bindEvent() {
       console.log(store)
       addBtn.addEventListener('click', () => {
-        store.dispatch({type: 'add', payload: 1})
+        store.dispatch({ type: 'add', payload: 1 })
       })
       minusBtn.addEventListener('click', () => {
-        store.dispatch({type: 'minus', payload: 1})
+        store.dispatch({ type: 'minus', payload: 1 })
       })
     }
     init()
   </script>
 </body>
+
 </html>

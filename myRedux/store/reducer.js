@@ -1,6 +1,7 @@
 import initalState from "./state"
+import { combineReducers } from "./redux"
 
-export default function reducer(state = initalState, aciton= {}) {
+function reducerCount(state = initalState, aciton= {}) {
   const  {type, payload} = aciton
   
   switch(type) {
@@ -19,3 +20,29 @@ export default function reducer(state = initalState, aciton= {}) {
       return state 
   }
 }
+
+function reducerState(state = {a: 1}, aciton = {}) {
+  const  {type, payload} = aciton
+    
+  switch(type) {
+    case 'add1': 
+      return {
+        ...state,
+        a: state.a + payload
+      }
+    case 'minus1': 
+
+      return {
+        ...state,
+        a:  state.a - payload
+      }
+    default :
+      return state 
+  }
+}
+
+
+export default combineReducers({
+  reducerCount,
+  reducerState
+})
